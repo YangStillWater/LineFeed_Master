@@ -28,7 +28,7 @@ def seperate_time(time1,time2,piece):
         timelist.append(time1+delta*i)
     return timelist
 
-def convert_to_timedelta(stime,brackets=True):
+def string_to_timedelta(stime,brackets=True):
     if brackets:
         stime=stime[1:-1]
     min,sec=str(stime).split(sep=':')
@@ -36,3 +36,11 @@ def convert_to_timedelta(stime,brackets=True):
     sec=float(sec)
     delta=timedelta(minutes=min,seconds=sec)
     return delta
+
+def timedelta_to_string(delta):
+    min,sec=divmod(delta.seconds,60)
+    min='%02d'%min
+    sec='{:02d}.{:02d}'.format(sec,int(delta.microseconds/10000))
+    rtn='[{}:{}]'.format(min,sec)
+    return rtn
+
